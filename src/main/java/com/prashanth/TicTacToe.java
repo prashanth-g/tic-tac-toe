@@ -41,9 +41,21 @@ public class TicTacToe {
         textLabel.setText("Tic-Tac-Toe");
         textLabel.setOpaque(true);
 
+        // Button to reset the game
+        JButton resetButton = new JButton("Reset");
+        resetButton.setFont(new Font("Arial", Font.BOLD, 20));
+        resetButton.setFocusable(false);
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetGame();
+            }
+        });
+
         // Add the text panel to the frame
         textPanel.setLayout(new BorderLayout());
         textPanel.add(textLabel);
+        textPanel.add(resetButton, BorderLayout.SOUTH);
         frame.add(textPanel, BorderLayout.NORTH);
 
         // Set up the board panel
@@ -79,6 +91,28 @@ public class TicTacToe {
                        }
                     }
                 });
+            }
+        }
+    }
+
+    public void resetGame() {
+        // Reset game variables
+        currentPlayer = playerX;
+        gameOver = false;
+        moves = 0;
+
+        // Reset the text label
+        textLabel.setText("Tic-Tac-Toe");
+        textLabel.setBackground(Color.darkGray);
+        textLabel.setForeground(Color.white);
+
+        // Reset the board buttons
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                JButton tile = board[r][c];
+                tile.setText("");
+                tile.setBackground(Color.darkGray);
+                tile.setForeground(Color.darkGray);
             }
         }
     }
